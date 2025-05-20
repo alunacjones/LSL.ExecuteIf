@@ -11,16 +11,18 @@ that gets given the target to do with as it pleases.
 
 ```csharp
 var values = new List<int> { 1, 2 };
-values.ExecuteIf(() => true, v => v.Add(3));
+values.ExecuteIf(() => true, v => v.Add(3))
+    .Add(22); // the list was returned so we can call add
 
-// values will now be { 1, 2, 3 }
+// values will now be { 1, 2, 3, 22 }
 ```
 
 ## Using a condition
 
 ```csharp
 var values = new List<int> { 1, 2 };
-values.ExecuteIf(true, v => v.Add(3));
+values.ExecuteIf(true, v => v.Add(3))
+    .Add(22); // the list was returned so we can call add
 
-// values will now be { 1, 2, 3 }
+// values will now be { 1, 2, 3, 22 }
 ```
