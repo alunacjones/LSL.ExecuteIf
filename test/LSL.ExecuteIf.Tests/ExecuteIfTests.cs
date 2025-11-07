@@ -7,12 +7,12 @@ namespace LSL.ExecuteIf.Tests;
 
 public class ExecuteIfTests
 {
-    [TestCase(false, new[] { 1, 2, 22 })]
+    [TestCase(false, new[] { 1, 2, 5, 22 })]
     [TestCase(true, new[] { 1, 2, 3, 22 })]
     public void GivenAPredicate_ThenItShouldReturnTheExpectedValue(bool willExecute, int[] expectedValues)
     {
         var values = new List<int> { 1, 2 };
-        values.ExecuteIf(() => willExecute, v => v.Add(3))
+        values.ExecuteIf(() => willExecute, v => v.Add(3), v => v.Add(5))
             .Add(22);
 
         values.Should().BeEquivalentTo(expectedValues);

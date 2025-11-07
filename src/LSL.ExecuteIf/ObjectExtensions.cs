@@ -15,8 +15,8 @@ public static class ObjectExtensions
     /// <param name="predicate"></param>
     /// <param name="actionToExecute"></param>
     /// <returns></returns>
-    public static T ExecuteIf<T>(this T source, Func<bool> predicate, Action<T> actionToExecute) =>
-        source.ExecuteIf(predicate.AssertNotNull(nameof(predicate))(), actionToExecute);
+    public static T ExecuteIf<T>(this T source, Func<bool> predicate, Action<T> actionToExecute, Action<T>? elseActionToExecute = null) =>
+        source.ExecuteIf(predicate.AssertNotNull(nameof(predicate))(), actionToExecute, elseActionToExecute);
 
     /// <summary>
     /// Conditionally execute a delegate and return the source object
@@ -26,9 +26,16 @@ public static class ObjectExtensions
     /// <param name="condition"></param>
     /// <param name="actionToExecute"></param>
     /// <returns></returns>
-    public static T ExecuteIf<T>(this T source, bool condition, Action<T> actionToExecute)
+    public static T ExecuteIf<T>(this T source, bool condition, Action<T> actionToExecute, Action<T>? elseActionToExecute = null)
     {
-        if (condition) actionToExecute.AssertNotNull(nameof(actionToExecute))(source);
+        if (condition)
+        {
+            actionToExecute.AssertNotNull(nameof(actionToExecute))(source);
+        }
+        else if (elseActionToExecute != null)
+        {
+            elseActionToExecute(source);
+        }
 
         return source;
     }
