@@ -34,9 +34,9 @@ public static class ObjectExtensions
         {
             actionToExecute.AssertNotNull(nameof(actionToExecute))(source);
         }
-        else if (elseActionToExecute != null)
+        else
         {
-            elseActionToExecute(source);
+            elseActionToExecute?.Invoke(source);
         }
 
         return source;
