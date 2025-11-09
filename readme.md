@@ -26,3 +26,24 @@ values.ExecuteIf(true, v => v.Add(3))
 
 // values will now be { 1, 2, 3, 22 }
 ```
+
+## Using a condition with an else action
+
+```csharp
+var values = new List<int> { 1, 2 };
+values.ExecuteIf(false, v => v.Add(3), v => v.Add(5))
+    .Add(22); // the list was returned so we can call Add(5)
+
+// values will now be { 1, 2, 5, 22 }
+```
+
+## Additional helper
+
+This library also provides a convenience extension method to configure a source object fluently.
+
+```csharp
+var values = new List<int> { 1, 2 };
+values.ConfigureWith(v => v.Add(5));
+
+// values will now be { 1, 2, 5 }
+```

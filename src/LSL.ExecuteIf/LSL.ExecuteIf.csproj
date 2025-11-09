@@ -21,6 +21,7 @@
     <RepositoryUrl>https://github.com/alunacjones/LSL.ExecuteIf</RepositoryUrl>
     <Authors>alunacjones</Authors>
     <LangVersion>12</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
