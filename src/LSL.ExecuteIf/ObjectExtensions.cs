@@ -48,4 +48,23 @@ public static class ObjectExtensions
         action?.Invoke(source);
         return source;
     }
+
+    /// <summary>
+    /// Fluently returns the result provided by <paramref name="resultProvider"/>
+    /// </summary>
+    /// <typeparam name="TInput"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
+    /// <param name="source"></param>
+    /// <param name="resultProvider"></param>
+    /// <returns></returns>
+    public static TResult ThenReturn<TInput, TResult>(this TInput source, Func<TInput, TResult> resultProvider) => resultProvider.AssertNotNull(nameof(resultProvider))(source);        
+
+    /// <summary>
+    /// Fluently returns <paramref name="result"/>
+    /// </summary>
+    /// <typeparam name="TResult"></typeparam>
+    /// <param name="source"></param>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    public static TResult ThenReturn<TResult>(this object source, TResult result) => result;
 }
